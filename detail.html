@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alladin 상세페이지</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="./images/shopping_app1.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- 구글 웹 폰트 -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- 구글 아이콘 -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="./css/detail.css">
+    <link rel="stylesheet" type="text/css" href="css/slick.css">
+    <link rel="stylesheet" type="text/css" href="./css/slick-theme.css"/>
+    <!-- 제이쿼리 js -->
+    <script type="text/javascript" src="./js/jquery-3.6.1.js"></script>
+    <!-- 슬릭슬라이더js -->
+    <script type="text/javascript" src="./js/slick.min.js"></script>
+    <script>
+        function get_Book_Sub(itemId){
+            $.ajax({
+                type : "get",
+                url : "http://masterhost.dothome.co.kr/API/Book/ItemLookUp.php",
+                data : "ttbkey=ttbkunks31455001&itemIdType=ItemId&ItemId="+itemId+"&output=js&Version=20131101&OptResult=ebookList,usedList,fileFormatList,c2binfo,packing,b2bSupply,subbarcode,cardReviewImgList,ratingInfo,bestSellerRank",
+                dataType: "json",
+                success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
+                    let objs = res.item;
+                    objs.forEach((fruit) => {
+                        price_df = fruit.priceStandard - fruit.priceSales;
+                        price_df_per = (price_df / fruit.priceStandard)*100 + "%";
+                        pub_data_k = fruit.pubDate.split("-");
+                        document.getElementById('local_Book').innerHTML = `
+                        <div class="bg_img">
+                            <div class="black_cover"></div>
+                            <div>
+                                <div class="detail_contents">
+                                    <div><img src="${fruit.cover}"></div>
+                                    <div class="detail_text">
+                                        <p>[${fruit.categoryName}]</p>
+                                        <p>${fruit.title}</p>
+                                        <div>
+                                            <div class="kt_contents">
+                                                <p>출판사</p><p>${fruit.publisher}</p>
+                                            </div>
+                                            <div class="kt_contents">
+                                                <p>저자</p><p>${fruit.author}</p>
+                                            </div>
+                                        </div>
+                                        <div class="kt_contents">
+                                            <p>출판일</p><p>${pub_data_k[0]}년 ${pub_data_k[1]}월 ${pub_data_k[2]}일</p>
+                                        </div>
+                                        <p>${fruit.description}</p>
+                                        <div>
+                                            <p>평점 ${fruit.customerReviewRank/2}</p><p></p>
+                                        </div>
+                                        <div>
+                                            <p>판매가</p>&nbsp;<p>${fruit.priceSales.toLocaleString()}원</p>
+                                            <p>&nbsp;(정가 <span>${fruit.priceStandard.toLocaleString()}원 </span><span>${Math.round(100*(1-fruit.priceSales/fruit.priceStandard))}%, </span><span>${(fruit.priceStandard-fruit.priceSales).toLocaleString()}원 할인)</span></p>
+                                        </div>
+                                        <div>
+                                            <p>수량</p>
+                                            <div>
+                                                <input type="text" pattern="[0-9]*(.[0-9]+)?" aria-valuemin="1" aria-valuemax="9007199254740991" aria-valuenow="1" aria-valuetext="1" autocomplete="off" autocorrect="off" value="1">
+                                                <div>
+                                                    <div><p>▲</p></div>
+                                                    <div><p>▼</p></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div><p>장바구니</p></div>
+                                            <div><p>바로구매</p></div>
+                                            <div><p>선물하기</p></div>
+                                            <div><p>보관함</p></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="add_description">
+                                <div><p>리뷰</p></div>
+                                <div>
+                                    <div class="review_contents">
+                                        <div>
+                                            <img src="./images/프로필아이콘.png" alt="프로필">
+                                        </div>
+                                        <div>
+                                            <div>평점 : ${fruit.customerReviewRank/2}</div>
+                                            <div><span>UserId</span>[100자평]한정판 핀뱃지가 상상이상으로 작길래(30mm...) 그...</div>
+                                        </div>
+                                    </div>
+                                    <div class="review_contents">
+                                        <div>
+                                            <img src="./images/프로필아이콘.png" alt="프로필">
+                                        </div>
+                                        <div>
+                                            <div>평점 : ${fruit.customerReviewRank/2}</div>
+                                            <div><span>UserId</span>[100자평]돈없어도 구매</div>
+                                        </div>
+                                    </div>
+                                    <div class="review_contents">
+                                        <div>
+                                            <img src="./images/프로필아이콘.png" alt="프로필">
+                                        </div>
+                                        <div>
+                                            <div>평점 : ${fruit.customerReviewRank/2}</div>
+                                            <div><span>UserId</span>[100자평]선착순 이타도리 유지 포토 카드 이쁘네요. 저도 구매완...</div>
+                                        </div>
+                                    </div>
+                                    <div class="review_contents">
+                                        <div>
+                                            <img src="./images/프로필아이콘.png" alt="프로필">
+                                        </div>
+                                        <div>
+                                            <div>평점 : ${fruit.customerReviewRank/2}</div>
+                                            <div><span>UserId</span>[100자평]구매완료</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="add_description basicinfo">
+                                <div><p>기본정보</p></div>
+                                <div>
+                                    <p>종합 주간 ${fruit.subInfo.bestSellerRank}위</p>
+                                    <p>${fruit.subInfo.itemPage} 페이지</p>
+                                    <p>ISBN: ${fruit.isbn}</p>
+                                    <p>카테고리 분류</p>
+                                    <p>${fruit.categoryName}</p>
+                                </div>
+                            </div>
+                            <div class="add_description book_desc">
+                                <div><p>책소개</p></div>
+                                <div>
+                                    <p>${fruit.description}</p>
+                                </div>
+                            </div>
+                        </div>`
+                        $(".bg_img").css({"background":`no-repeat center url(${fruit.cover})`}).css("background-size", "cover");
+                        let obj = fruit.subInfo.cardReviewImgList;
+                        if(obj != undefined){
+                            document.getElementById('local_Book').innerHTML += `
+                            <div class="add_description">
+                                <div><p>카드리뷰</p></div>
+                                <div>
+                                    <p>카드리뷰 이미지 경로 : ${fruit.subInfo.cardReviewImgList[0]}</p>
+                                    <p>카드리뷰 이미지 경로 : ${fruit.subInfo.cardReviewImgList[1]}</p>
+                                    <p>카드리뷰 이미지 경로 : ${fruit.subInfo.cardReviewImgList[2]}</p>
+                                </div>
+                            </div>`
+                        }
+                    });
+                },error : function(XMLHttpRequest, textStatus, errorThrown){
+                    console.log(textStatus);
+                }
+            });
+        };
+        var url = new URLSearchParams(location.search);
+        var detail_item_Num = url.get("detail_item_Num");
+        get_Book_Sub(detail_item_Num);
+    </script>
+</head>
+<body>
+    <div class="overlay" id="log_in">
+        <div class="overlay_contents">
+            <div>
+                <p>로그인</p>
+                <button class="close_btn"><span class="material-symbols-outlined">
+                    close
+                    </span></button>
+            </div>
+            <div>
+                <div class="user_info_input">
+                    <div class="icon_over"><img src="images/userid.png" alt="id"></div>
+                    <input name="userId" placeholder="아이디">
+                </div>
+                <div class="user_info_input">
+                    <div class="icon_over"><img src="./images/password.png" alt="password"></div>
+                    <input name="password" placeholder="비밀번호">
+                </div>
+                <button type="submit">로그인</button>
+                <div class="hrbox">
+                    <hr>
+                    <p>OR</p>
+                    <hr>
+                </div>
+                <div class="snsbox">
+                    <div><img src="./images/github.png"></div>
+                    <div><img src="./images/kakaotalk.png"></div>
+                    <div><img src="./images/naver.png"></div>
+                    <div><img src="./images/google.png"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="overlay" id="sign_in">
+        <div class="overlay_contents">
+            <div>
+                <p>회원가입</p>
+                <button class="close_btn"><span class="material-symbols-outlined">
+                    close
+                    </span></button>
+            </div>
+            <div>
+                <div class="user_info_input">
+                    <div class="icon_over"><img src="images/userid.png" alt="id"></div>
+                    <input name="userId" placeholder="아이디">
+                </div>
+                <div class="user_info_input">
+                    <div class="icon_over"><img src="images/email.png" alt="id"></div>
+                    <input name="email" placeholder="이메일">
+                </div>
+                <div class="user_info_input">
+                    <div class="icon_over"><img src="./images/password.png" alt="password"></div>
+                    <input name="password" placeholder="비밀번호">
+                </div>
+                <div class="user_info_input">
+                    <div class="icon_over"></div>
+                    <input name="password2" placeholder="비밀번호 확인">
+                </div>
+                <button type="submit">회원가입</button>
+                <div class="hrbox">
+                    <hr>
+                    <p>OR</p>
+                    <hr>
+                </div>
+                <div class="snsbox">
+                    <div><img src="./images/github.png"></div>
+                    <div><img src="./images/kakaotalk.png"></div>
+                    <div><img src="./images/naver.png"></div>
+                    <div><img src="./images/google.png"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <header>
+        <div id="headerContainer">
+            <div id="headerVisible">
+                <div id="btn">
+                    <div>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+                <div>
+                    <img id="logo_kor" src="./images/logo_kor.png" alt="logo">
+                    <img id="logo" src="./images/logo.png" alt="logo">
+                </div>
+                <div>
+                    <span id="light_mode" class="material-symbols-outlined">
+                        light_mode
+                    </span>
+                    <div id="sign_btn">
+                        <span class="material-symbols-outlined">
+                            remember_me
+                        </span>
+                        <span>회원가입</span>
+                    </div>
+                    <div  id="log_btn">
+                        <span class="material-symbols-outlined">
+                            login
+                        </span>
+                        <span>로그인</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="blind">
+        <ul>
+            <li><a href="./sub.html?categ_Num=1" target="_blank">국내도서</a></li>
+            <li><a href="./sub.html?categ_Num=2" target="_blank">외국도서</a></li>
+            <li><a href="./sub.html?categ_Num=3" target="_blank">음반</a></li>
+            <li><a href="./sub.html?categ_Num=4" target="_blank">DVD</a></li>
+            <li><a href="./sub.html?categ_Num=5" target="_blank">중고책</a></li>
+            <li><a href="./sub.html?categ_Num=6" target="_blank">전자책</a></li>
+        </ul>
+    </div>
+    <div id="empty"><!-- 헤더 여백 용 --></div>
+    <div id="local_Book"></div>
+    <footer>
+        <div class="footer_container">
+            <p><img src="./images/logo.png"></p>
+            <div>
+                <div>
+                    <p>회사소개</p>
+                    <p>이용약관</p>
+                </div>
+                <div>
+                    <p>중고매장</p>
+                    <p>광고안내</p>
+                </div>
+            </div>
+            <div>
+                <p>개인정보처리방침</p>
+                <p>청소년 보호정책</p>
+            </div>
+            <div>
+                <p>제휴/마케팅안내</p>
+                <p>출판사/공급사 안내</p>
+            </div>
+            <div>
+                <p>판매자 매니저</p>
+                <p>학교/기업/기관 대량구매</p>
+            </div>
+            <div>
+                <p><span>(주)알라딘커뮤니케이션 </span>대표이사 : 최우경<span> 사업자등록 : 201-81-23094 통신판매업신고 : 중구01520호</span></p>
+                <p><span>고객센터 </span>일반문의<span>(발신자 부담) </span>1544-2514</p>
+            </div>
+            <p>(본사) 서울시 중구 서소문로 89-31</p>
+            <p>(고객센터) 서울시 마포구 백범로 71 숨도빌딩 7층, Fax 02-6926-2600</p>
+            <div>
+                <button><span></span>1:1 문의</button>
+                <button><span></span>FAQ</button>
+                <button><span></span>Call us</button>
+            </div>
+        </div>
+    </footer>
+    <!-- 토글 메뉴 -->
+    <script>
+        $("#btn").click(function(){
+            $("ul").toggleClass("active");
+            $("#btn").toggleClass("active");
+        });
+        window.addEventListener('resize', () => {
+            if(window.innerWidth >= 960) {
+                $("ul").removeClass("active");  
+                $("#btn").removeClass("active");  
+            }
+        })
+    </script>
+    <!-- 오버레이 색션 토글 -->
+    <script>
+        $("#log_btn").click(function(){
+            $("#log_in").addClass("active");
+        });
+        $("#sign_btn").click(function(){
+            $("#sign_in").addClass("active");
+        });
+        $(".close_btn").click(function(){
+            $("#log_in").removeClass("active");
+            $("#sign_in").removeClass("active");
+        });
+        $(document).mouseup(function (e){
+            var overlay_contents = $(".overlay_contents");
+            if (overlay_contents.has(e.target).length === 0) {
+                console.log((e.target).lenght);
+                $("#log_in").removeClass("active");
+                $("#sign_in").removeClass("active");
+            }
+        })
+    </script>
+    <!-- 헤더 ul 위치 조정 -->
+    <script>
+        if(window.innerWidth >= 960) {
+            var position_ul = (window.innerWidth / 2 - 260) + "px";
+            $(".blind").css("left", position_ul);
+        };
+        window.addEventListener('resize', () => {
+            if(window.innerWidth >= 960) {
+                var position_ul = (window.innerWidth / 2 - 260) + "px";
+                $(".blind").css("left", position_ul);
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="icon" type="image/png" sizes="16x16" href="./images/shopping_app1.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- 구글 웹 폰트 -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- 구글 아이콘 -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="./css/sub.css">
+    <link rel="stylesheet" type="text/css" href="css/slick.css">
+    <link rel="stylesheet" type="text/css" href="./css/slick-theme.css"/>
+    <!-- 제이쿼리 js -->
+    <script type="text/javascript" src="./js/jquery-3.6.1.js"></script>
+    <!-- 슬릭슬라이더js -->
+    <script type="text/javascript" src="./js/slick.min.js"></script>
+    <!-- (메인페이지 변수 받아) API 불러오기 -->
+    <script>
+        var org_Name;
+        var Page = 1;
+        function get_local_Book(itemName){
+            if(org_Name != itemName){
+                org_Name = itemName;
+                document.getElementById("local_Book_list").innerHTML = "";
+                document.getElementById("local_Book_baduk").innerHTML = "";
+            }else{
+                Page += 1
+            }
+            var nameBook = "국내도서";
+            if(itemName == "book"){
+                nameBook = "국내도서";
+            }else if(itemName == "Foreign"){
+                nameBook = "외국도서";
+            }else if(itemName == "eBook"){
+                nameBook = "전자책";
+            }else if(itemName == "Music"){
+                nameBook = "음반";
+            }else if(itemName == "Used"){
+			    nameBook = "중고책";
+            }else if(itemName == "DVD"){
+                nameBook = "DVD";
+            }
+            document.querySelector("h1").innerHTML = nameBook;
+            document.querySelector("title").innerHTML = "Alladin " + nameBook;
+            $.ajax({
+                type : "get",
+                url : "http://masterhost.dothome.co.kr/API/Book/ItemList.php",
+                data : "ttbkey=ttbkunks31455001&QueryType=Bestseller&SearchTarget="+itemName+"&SubSearchTarget=Book&Cover=big&Start="+Page+"&MaxResults=28&Output=js&Version=20131101",
+                dataType: "json",
+                success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
+                    let objs = res.item;
+                    objs.forEach((fruit) => {
+                        pub_data_k = fruit.pubDate.split("-");
+                        author_shorts = fruit.author.split("(");
+                        author_etc = author_shorts[0].split(",");
+                        publisher_shorts = fruit.publisher.split("(");
+                        etc_text = "";
+                        if (author_etc.length > 1) {
+                            etc_text = " 외 " + (author_etc.length - 1) + "명";
+                        }
+                        
+                        document.getElementById('local_Book_baduk').innerHTML += `
+                        <div class="t_01">
+                            <div class="t_0102">
+                                <div class="t_010201">
+                                    <p><a href="./detail.html?detail_item_Num=${fruit.itemId}" target="_blank"><img src="${fruit.cover}"></a></p>
+                                </div>
+                                <div class="t_010202">
+                                    <p><a href="./detail.html?detail_item_Num=${fruit.itemId}" target="_blank"><b class="book_title">${fruit.title}</b></a></p>
+                                    <p>${pub_data_k[0]}년 ${pub_data_k[1]}월 ${pub_data_k[2]}일</p>
+                                    <p>${author_etc[0]}${etc_text}</p>
+                                    <p>${publisher_shorts[0]}</p>
+                                </div>
+                            </div>
+                        </div>
+                        `
+                        document.getElementById('local_Book_list').innerHTML += `
+                        <div class="t_01">
+                            <div class="t_0101">
+                                <div><input type="checkbox"></div>
+                            </div>
+                            <div class="t_010201">
+                                <p><a href="./detail.html?detail_item_Num=${fruit.itemId}" target="_blank"><img src="${fruit.cover}"></a></p>
+                            </div>
+                            <div class="t_010202">
+                                <p>[${fruit.categoryName}]</p>
+                                <p class="book_title"><a href="./detail.html?detail_item_Num=${fruit.itemId}" target="_blank">${fruit.title}</a></p>
+                                <div>
+                                    <div class="kt_contents">
+                                        <p>출판사</p><p>${fruit.publisher}</p>
+                                    </div>
+                                    <div class="kt_contents">
+                                        <p>저자</p><p>${fruit.author}</p>
+                                    </div>
+                                </div>
+                                <div class="kt_contents">
+                                    <p>출판일</p><p>${fruit.pubDate}</p>
+                                </div>
+                                <p>${fruit.description}</p>
+                                <div>
+                                    <p>판매가</p>&nbsp;<p>${fruit.priceSales.toLocaleString()}원</p>
+                                    <p>&nbsp;(정가 <span>${fruit.priceStandard.toLocaleString()}원 </span><span>${Math.round(100*(1-fruit.priceSales/fruit.priceStandard))}%, </span><span>${(fruit.priceStandard-fruit.priceSales).toLocaleString()}원 할인)</span></p>
+                                </div>
+                            </div>
+                            <div class="t_0103">
+                                <div>
+                                    <button class="btn color_white bg_deepPink">예약<br>장바구니</button>
+                                </div>
+                                <div>
+                                    <button class="btn color_white bg_crimson">예약<br>바로구매</button>
+                                </div>
+                                <div>
+                                    <button class="btn color_7ab4da gb_7ab4da">보관함▾</button>
+                                </div>
+                            </div>
+                        </div>
+                        `
+                    });
+                },error : function(XMLHttpRequest, textStatus, errorThrown){
+                    console.log(textStatus);
+                }
+            });
+        }
+        $(function(){
+            var url = new URLSearchParams(location.search);
+            var categ_Num = url.get('categ_Num');
+            switch(parseInt(categ_Num)){
+                case 1: 
+                    get_local_Book('Book');
+                    break;
+                case 2: 
+                    get_local_Book('Foreign');
+                    break;
+                case 3: 
+                    get_local_Book('Music');
+                    break;
+                case 4: 
+                    get_local_Book('DVD');
+                    break;
+                case 5: 
+                    get_local_Book('Used');
+                    break;
+                case 6: 
+                    get_local_Book('eBook');
+                    break;
+                default:
+                    get_local_Book('Book');
+            };
+        });
+    </script>
+</head>
+<body>
+    <div class="overlay" id="log_in">
+        <div class="overlay_contents">
+            <div>
+                <p>로그인</p>
+                <button class="close_btn"><span class="material-symbols-outlined">
+                    close
+                    </span></button>
+            </div>
+            <div>
+                <div class="user_info_input">
+                    <div class="icon_over"><img src="images/userid.png" alt="id"></div>
+                    <input name="userId" placeholder="아이디">
+                </div>
+                <div class="user_info_input">
+                    <div class="icon_over"><img src="./images/password.png" alt="password"></div>
+                    <input name="password" placeholder="비밀번호">
+                </div>
+                <button type="submit">로그인</button>
+                <div class="hrbox">
+                    <hr>
+                    <p>OR</p>
+                    <hr>
+                </div>
+                <div class="snsbox">
+                    <div><img src="./images/github.png"></div>
+                    <div><img src="./images/kakaotalk.png"></div>
+                    <div><img src="./images/naver.png"></div>
+                    <div><img src="./images/google.png"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="overlay" id="sign_in">
+        <div class="overlay_contents">
+            <div>
+                <p>회원가입</p>
+                <button class="close_btn"><span class="material-symbols-outlined">
+                    close
+                    </span></button>
+            </div>
+            <div>
+                <div class="user_info_input">
+                    <div class="icon_over"><img src="images/userid.png" alt="id"></div>
+                    <input name="userId" placeholder="아이디">
+                </div>
+                <div class="user_info_input">
+                    <div class="icon_over"><img src="images/email.png" alt="id"></div>
+                    <input name="email" placeholder="이메일">
+                </div>
+                <div class="user_info_input">
+                    <div class="icon_over"><img src="./images/password.png" alt="password"></div>
+                    <input name="password" placeholder="비밀번호">
+                </div>
+                <div class="user_info_input">
+                    <div class="icon_over"></div>
+                    <input name="password2" placeholder="비밀번호 확인">
+                </div>
+                <button type="submit">회원가입</button>
+                <div class="hrbox">
+                    <hr>
+                    <p>OR</p>
+                    <hr>
+                </div>
+                <div class="snsbox">
+                    <div><img src="./images/github.png"></div>
+                    <div><img src="./images/kakaotalk.png"></div>
+                    <div><img src="./images/naver.png"></div>
+                    <div><img src="./images/google.png"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <header>
+        <div id="headerContainer">
+            <div id="headerVisible">
+                <div id="btn">
+                    <div>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+                <div>
+                    <img id="logo_kor" src="./images/logo_kor.png" alt="logo">
+                    <img id="logo" src="./images/logo.png" alt="logo">
+                </div>
+                <div>
+                    <span id="light_mode" class="material-symbols-outlined">
+                        light_mode
+                    </span>
+                    <div id="sign_btn">
+                        <span class="material-symbols-outlined">
+                            remember_me
+                        </span>
+                        <span>회원가입</span>
+                    </div>
+                    <div  id="log_btn">
+                        <span class="material-symbols-outlined">
+                            login
+                        </span>
+                        <span>로그인</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="blind">
+        <ul>
+            <li onclick="get_local_Book('Book');">국내도서</li>
+            <li onclick="get_local_Book('Foreign');">외국도서</li>
+            <li onclick="get_local_Book('Music');">음반</li>
+            <li onclick="get_local_Book('DVD');">DVD</li>
+            <li onclick="get_local_Book('Used');">중고책</li>
+            <li onclick="get_local_Book('eBook');">전자책</li>
+        </ul>
+    </div>
+    <div id="empty"><!-- 헤더 여백 용 --></div>
+    <section>
+        <div id="searchContents">
+            <h1>국내도서</h1>
+            <div id="search">
+                <input type="text" id="ItemSearch" placeholder="도서검색">
+                <button onclick="mainItemSearch($('#ItemSearch').val());"><img src="./images/search.png" alt="search"></button>
+            </div>
+        </div>
+    </section>
+    <div class="inner">
+        <div id="viewtype">
+            <div><!-- 빈공간 --></div>
+            <label id="baduk">
+                <span class="material-symbols-outlined">
+                    apps
+                </span>
+            </label>
+            <label id="list">
+                <span class="material-symbols-outlined">
+                    format_list_bulleted
+                </span>
+            </label>
+        </div>
+        <div id="local_Book_baduk"></div>
+        <div id="local_Book_list"></div>
+        </div>
+    </div>
+    <footer>
+        <div id="footItem">
+            <img id="footImage" src="./images/logo_footer.png" alt="logo">
+            <div id="footContents">
+                <p>(주) 알라딘커뮤니케이션</p>
+                <p class="p_flex"><span>대표이사 : 최우경</span><span>고객정보보호 책임자 : 최우경</span></p>
+                <p class="p_flex"><span>사업자등록 : 201-81-23094</span><span>E-mail : privacy@aladin.co.kr</span></p>
+                <p>통신판매업신고 : 중구01520호</p>
+                <p>호스팅 제공자 : 알라딘커뮤니케이션</p>
+                <p>(본사) 서울시 중구 서소문로 89-31 ㅣ (중고매장) 자세히보기</p>
+                <p>(고객센터) 서울시 마포구 백범로 71 숨도빌딩 7층, Fax 02-6926-2600</p>
+                <p>ⓒ Aladin Communication. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <!-- 토글 메뉴 -->
+    <script>
+        $("#btn").click(function(){
+            $("ul").toggleClass("active");
+            $("#btn").toggleClass("active");
+        });
+        window.addEventListener('resize', () => {
+            if(window.innerWidth >= 960) {
+                $("ul").removeClass("active");  
+                $("#btn").removeClass("active");  
+            }
+        })
+    </script>
+    <!-- 오버레이 색션 토글 -->
+    <script>
+        $("#log_btn").click(function(){
+            $("#log_in").addClass("active");
+        });
+        $("#sign_btn").click(function(){
+            $("#sign_in").addClass("active");
+        });
+        $(".close_btn").click(function(){
+            $("#log_in").removeClass("active");
+            $("#sign_in").removeClass("active");
+        });
+        $(document).mouseup(function (e){
+            var overlay_contents = $(".overlay_contents");
+            if (overlay_contents.has(e.target).length === 0) {
+                console.log((e.target).lenght);
+                $("#log_in").removeClass("active");
+                $("#sign_in").removeClass("active");
+            }
+        })
+    </script>
+    <!-- 헤더 ul 위치 조정 -->
+    <script>
+        if(window.innerWidth >= 960) {
+            var position_ul = (window.innerWidth / 2 - 260) + "px";
+            $(".blind").css("left", position_ul);
+        };
+        window.addEventListener('resize', () => {
+            if(window.innerWidth >= 960) {
+                var position_ul = (window.innerWidth / 2 - 260) + "px";
+                $(".blind").css("left", position_ul);
+            }
+        });
+    </script>
+    <!-- 배열 토글 버튼 색상 변경 -->
+    <script>
+        $("#baduk").click(function(){
+            $("#baduk").css("color", "#2B6CB0").css("border-bottom", "2px solid #2B6CB0");
+            $("#list").css("color", "#a8a8a8").css("border-bottom", "1px solid #a8a8a8").css("cursor", "pointer");
+            $("#local_Book_baduk").css("display", "flex");
+            $("#local_Book_list").css("display", "none");
+        });
+        $("#list").click(function(){
+            $("#list").css("color", "#2B6CB0").css("border-bottom", "2px solid #2B6CB0");
+            $("#baduk").css("color", "#a8a8a8").css("border-bottom", "1px solid #a8a8a8").css("cursor", "pointer");
+            $("#local_Book_baduk").css("display", "none");
+            $("#local_Book_list").css("display", "block");
+        });
+    </script>
+    <!-- 바둑 배열 컨텐츠 배수 조정(미완) -->
+    <script>
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 1079 && window.innerWidth < 1253) {
+                for(i = 1; i <= page*4; i++) {
+                    for(k = 1; k <= (28 - page*4); k++) {
+                        $("#local_Book_baduk .t_01:nth-child("+k+")").css("display", "block");
+                    }
+                    $("#local_Book_baduk .t_01:nth-last-child("+i+")").css("display", "none");
+                }
+            } else if (window.innerWidth >= 905) {
+                for(i = 1; i <= page*3; i++) {
+                    for(k = 1; k <= (28 - page*3); k++) {
+                        $("#local_Book_baduk .t_01:nth-child("+k+")").css("display", "block");
+                    }
+                    $("#local_Book_baduk .t_01:nth-last-child("+i+")").css("display", "none");
+                }
+            } else if (window.innerWidth >= 383) {
+                for(i = 1; i <= page*4; i++) {
+                    for(k = 1; k <= (28 - page*4); k++) {
+                        $("#local_Book_baduk .t_01:nth-child("+k+")").css("display", "block");
+                    }
+                    $("#local_Book_baduk .t_01:nth-last-child("+i+")").css("display", "none");
+                }
+            }
+        });
+    </script>
+</body>
+</html>

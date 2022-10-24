@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alladin</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="./images/shopping_app1.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- 구글 웹 폰트 -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- 구글 아이콘 -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" type="text/css" href="css/slick.css">
+    <link rel="stylesheet" type="text/css" href="./css/slick-theme.css"/>
+    <!-- 제이쿼리 js -->
+    <script type="text/javascript" src="./js/jquery-3.6.1.js"></script>
+    <!-- 슬릭슬라이더js -->
+    <script type="text/javascript" src="./js/slick.min.js"></script>
+    <!-- slick slider(랭킹용) -->
+    <script>
+        function sel(a){
+            $('#'+ a).slick({
+                slide: 'div',		//슬라이드 되어야 할 태그 ex) div, li 
+                infinite : true, 	//무한 반복 옵션	 
+                slidesToShow : 5,		// 한 화면에 보여질 컨텐츠 개수
+                slidesToScroll : 5,		//스크롤 한번에 움직일 컨텐츠 개수
+                speed : 500,	 // 다음 버튼 누르고 다음 화면 뜨는데까지 걸리는 시간(ms)
+                arrows : true, 		// 옆으로 이동하는 화살표 표시 여부
+                /* dots : true, */ 		// 스크롤바 아래 점으로 페이지네이션 여부
+                autoplay : true,			// 자동 스크롤 사용 여부
+                autoplaySpeed : 2000, 		// 자동 스크롤 시 다음으로 넘어가는데 걸리는 시간 (ms)
+                pauseOnHover : true,		// 슬라이드 이동시 마우스 호버하면 슬라이더 멈추게 설정
+                vertical : false,		// 세로 방향 슬라이드 옵션
+        /* 		prevArrow : "<button type='button' class='slick-prev'>Previous</button>",		// 이전 화살표 모양 설정
+                nextArrow : "<button type='button' class='slick-next'>Next</button>",		// 다음 화살표 모양 설정
+                dotsClass : "slick-dots", 	//아래 나오는 페이지네이션(점) css class 지정 */
+                draggable : true, 	//드래그 가능 여부 
+                responsive: [ // 반응형 웹 구현 옵션
+                    {  
+                        breakpoint: 1200,
+                        settings: {
+                            slidesToScroll : 4,
+                            slidesToShow: 4
+                        }
+                    },
+                    {  
+                        breakpoint: 980,
+                        settings: {
+                            slidesToScroll : 3,
+                            slidesToShow: 3
+                        }
+                    },
+                    {  
+                        breakpoint: 760,
+                        settings: {
+                            slidesToScroll : 2,
+                            slidesToShow: 2
+                        }
+                    },
+                    {  
+                        breakpoint: 540,
+                        settings: {
+                            slidesToScroll : 1,
+                            slidesToShow: 1
+                        }
+                    }
+                ]
+            });
+        }
+    </script>
+    <!-- slick slider(일반용) -->
+    <script>
+        function sel2(a){
+            $('#'+ a).slick({
+                slide: 'div',		//슬라이드 되어야 할 태그 ex) div, li 
+                infinite : true, 	//무한 반복 옵션	 
+                slidesToShow : 7,		// 한 화면에 보여질 컨텐츠 개수
+                slidesToScroll : 1,		//스크롤 한번에 움직일 컨텐츠 개수
+                speed : 500,	 // 다음 버튼 누르고 다음 화면 뜨는데까지 걸리는 시간(ms)
+                arrows : true, 		// 옆으로 이동하는 화살표 표시 여부
+                /* dots : true, */ 		// 스크롤바 아래 점으로 페이지네이션 여부
+                autoplay : true,			// 자동 스크롤 사용 여부
+                autoplaySpeed : 2000, 		// 자동 스크롤 시 다음으로 넘어가는데 걸리는 시간 (ms)
+                pauseOnHover : true,		// 슬라이드 이동시 마우스 호버하면 슬라이더 멈추게 설정
+                vertical : false,		// 세로 방향 슬라이드 옵션
+        /* 		prevArrow : "<button type='button' class='slick-prev'>Previous</button>",		// 이전 화살표 모양 설정
+                nextArrow : "<button type='button' class='slick-next'>Next</button>",		// 다음 화살표 모양 설정
+                dotsClass : "slick-dots", 	//아래 나오는 페이지네이션(점) css class 지정 */
+                draggable : true, 	//드래그 가능 여부 
+                responsive: [ // 반응형 웹 구현 옵션
+                    {  
+                        breakpoint: 1200,
+                        settings: {
+                            slidesToShow: 6
+                        }
+                    },
+                    {  
+                        breakpoint: 1060,
+                        settings: {
+                            slidesToShow: 5
+                        }
+                    },
+                    {  
+                        breakpoint: 900,
+                        settings: {
+                            slidesToShow: 4
+                        }
+                    },
+                    {  
+                        breakpoint: 740,
+                        settings: {
+                            slidesToShow: 3
+                        }
+                    },
+                    {  
+                        breakpoint: 580,
+                        settings: {
+                            slidesToShow: 2
+                        }
+                    },
+                    {  
+                        breakpoint: 420,
+                        settings: {
+                            slidesToShow: 1
+                        }
+                    }
+                ]
+            });
+        }
+    </script>
+    <!-- slick slider(이벤트용) -->
+    <script>
+        function sel3(a){
+            $('#'+ a).slick({
+                slide: 'div',		//슬라이드 되어야 할 태그 ex) div, li 
+                infinite : true, 	//무한 반복 옵션	 
+                slidesToShow : 4,		// 한 화면에 보여질 컨텐츠 개수
+                slidesToScroll : 1,		//스크롤 한번에 움직일 컨텐츠 개수
+                speed : 500,	 // 다음 버튼 누르고 다음 화면 뜨는데까지 걸리는 시간(ms)
+                arrows : true, 		// 옆으로 이동하는 화살표 표시 여부
+                /* dots : true, */ 		// 스크롤바 아래 점으로 페이지네이션 여부
+                autoplay : true,			// 자동 스크롤 사용 여부
+                autoplaySpeed : 2000, 		// 자동 스크롤 시 다음으로 넘어가는데 걸리는 시간 (ms)
+                pauseOnHover : true,		// 슬라이드 이동시 마우스 호버하면 슬라이더 멈추게 설정
+                vertical : false,		// 세로 방향 슬라이드 옵션
+        /* 		prevArrow : "<button type='button' class='slick-prev'>Previous</button>",		// 이전 화살표 모양 설정
+                nextArrow : "<button type='button' class='slick-next'>Next</button>",		// 다음 화살표 모양 설정
+                dotsClass : "slick-dots", 	//아래 나오는 페이지네이션(점) css class 지정 */
+                draggable : true, 	//드래그 가능 여부 
+                responsive: [ // 반응형 웹 구현 옵션
+                    {  
+                        breakpoint: 1200,
+                        settings: {
+                            slidesToShow: 3
+                        }
+                    },
+                    {  
+                        breakpoint: 900,
+                        settings: {
+                            slidesToShow: 2
+                        }
+                    },
+                    {  
+                        breakpoint: 600,
+                        settings: {
+                            slidesToShow: 1
+                        }
+                    }
+                ]
+            });
+        }
+    </script>
+    <!-- 반응형 케러셀 너비 조절 -->
+    <script>
+        window.addEventListener('resize', () => {
+            var resp_w = (100 - 10000 / window.innerWidth) + "%";
+            $(".dp_flex").css("width", resp_w);    
+        });
+    </script>
+    <!-- API 제공 정보 불러오기 -->
+    <script>
+        function ItemNewAll(){
+            var xmlhttp = new XMLHttpRequest();
+            let url = "http://masterhost.dothome.co.kr/API/Book/ItemList.php?";
+            let url_Parse = "ttbkey=ttbkunks31455001&QueryType=ItemNewAll&SearchTarget=Book&SubSearchTarget=Book&Cover=big&MaxResults=10&Output=js&Version=20131101";
+            xmlhttp.open("GET", url+url_Parse, true);
+            xmlhttp.send();
+            xmlhttp.onreadystatechange = function(){
+                if(this.readyState == 4 && this.status == 200){
+                    //$("#demo_0").text(this.responseText);
+                    let obj = JSON.parse(this.responseText);
+                    let objs = obj.item;
+                    objs.forEach(fruit => {
+                        document.getElementById('ItemNewAll').innerHTML += `
+                            <div class='newItem'>
+                                <div class="newItemImage">
+                                    <img src=${fruit.cover} alt='book'>
+                                </div>
+                                <div class="newContents">
+                                    <p>${fruit.title}</p>
+                                    <p>${fruit.pubDate}</p>
+                                    <p>${fruit.publisher}</p>
+                                </div>
+                            </div>`
+                        //console.log(fruit.cover);
+                    });
+                    sel2("ItemNewAll");
+                }
+            };
+        }
+        ItemNewAll();
+        function ItemNewSpecial(){
+            var xmlhttp = new XMLHttpRequest();
+            let url = "http://masterhost.dothome.co.kr/API/Book/ItemList.php?";
+            let url_Parse = "ttbkey=ttbkunks31455001&QueryType=ItemNewSpecial&SearchTarget=Book&SubSearchTarget=Book&Cover=big&MaxResults=10&Output=js&Version=20131101";
+            xmlhttp.open("GET", url+url_Parse, true);
+            xmlhttp.send();
+            xmlhttp.onreadystatechange = function(){
+                if(this.readyState == 4 && this.status == 200){
+                    //$("#demo_0").text(this.responseText);
+                    let obj = JSON.parse(this.responseText);
+                    let objs = obj.item;
+                    objs.forEach(fruit => {
+                        document.getElementById('ItemNewSpecial').innerHTML += `
+                            <div class='newItem'>
+                                <div class="newItemImage">
+                                    <img src=${fruit.cover} alt='book'>
+                                </div>
+                                <div class="newContents">
+                                    <p>${fruit.title}</p>
+                                    <p>${fruit.pubDate}</p>
+                                    <p>${fruit.publisher}</p>
+                                </div>
+                            </div>`
+                        //console.log(fruit.cover);
+                    });
+                    sel2('ItemNewSpecial');
+                }
+            };
+        }
+    ItemNewSpecial();
+        function Bestseller(){
+            var xmlhttp = new XMLHttpRequest();
+            let url = "http://masterhost.dothome.co.kr/API/Book/ItemList.php?";
+            let url_Parse = "ttbkey=ttbkunks31455001&QueryType=Bestseller&SearchTarget=Book&SubSearchTarget=Book&Cover=big&MaxResults=10&Output=js&Version=20131101";
+            xmlhttp.open("GET", url+url_Parse, true);
+            xmlhttp.send();
+            xmlhttp.onreadystatechange = function(){
+                if(this.readyState == 4 && this.status == 200){
+                    //$("#demo_0").text(this.responseText);
+                    let obj = JSON.parse(this.responseText);
+                    let objs = obj.item;
+                    objs.forEach((fruit, index) => {
+                        document.getElementById('Bestseller').innerHTML += `
+                            <div class='newItem'>
+                                <div class='newRank'>
+                                    <div class="newItemNum"> ${index + 1} </div>
+                                    <div class="newItemImage">
+                                        <img src=${fruit.cover} alt='book'>
+                                    </div>
+                                </div>
+                                <div class="newContents">
+                                    <p>${fruit.title}</p>
+                                    <p>${fruit.pubDate}</p>
+                                    <p>${fruit.publisher}</p>
+                                </div>
+                            </div>`
+                        //console.log(fruit.cover);
+                    });
+                    sel('Bestseller');
+                }
+            };
+        }
+        Bestseller();
+        function BlogBest(){
+            var xmlhttp = new XMLHttpRequest();
+            let url = "http://masterhost.dothome.co.kr/API/Book/ItemList.php?";
+            let url_Parse = "ttbkey=ttbkunks31455001&QueryType=BlogBest&SearchTarget=Book&SubSearchTarget=Book&Cover=big&MaxResults=10&Output=js&Version=20131101";
+            xmlhttp.open("GET", url+url_Parse, true);
+            xmlhttp.send();
+            xmlhttp.onreadystatechange = function(){
+                if(this.readyState == 4 && this.status == 200){
+                    //$("#demo_0").text(this.responseText);
+                    let obj = JSON.parse(this.responseText);
+                    let objs = obj.item;
+                    objs.forEach(fruit => {
+                        document.getElementById('BlogBest').innerHTML += `
+                            <div class='newItem'>
+                                <div class="newItemImage">
+                                    <img src=${fruit.cover} alt='book'>
+                                </div>
+                                <div class="newContents">
+                                    <p>${fruit.title}</p>
+                                    <p>${fruit.pubDate}</p>
+                                    <p>${fruit.publisher}</p>
+                                </div>
+                            </div>`
+                        //console.log(fruit.cover);
+                    });
+                    sel2('BlogBest');
+                }
+            };
+        }	
+        BlogBest();
+        function mainItemSearch(Query){
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.open("GET", "http://masterhost.dothome.co.kr/API/Book/ItemSearch.php?ttbkey=ttbkunks31455001&SearchTarget=Book&MaxResults=10&start=1&Cover=Big&Query="+Query+"&output=js&QueryType=Title&Version=20131101", true);
+            xmlhttp.send();
+            xmlhttp.onreadystatechange = function(){
+                if(this.readyState == 4 && this.status == 200){
+                    //$("#demo_0").text(this.responseText);
+                    var obj = JSON.parse(this.responseText);
+                    $("#demo_1").html("<img src='"+obj.item[0].cover+"'>");
+                }
+            };
+        }
+    </script>
+</head>
+<body>
+    <div class="overlay" id="log_in">
+        <div class="overlay_contents">
+            <div>
+                <p>로그인</p>
+                <button class="close_btn"><span class="material-symbols-outlined">
+                    close
+                    </span></button>
+            </div>
+            <div>
+                <div class="user_info_input">
+                    <div class="icon_over"><img src="images/userid.png" alt="id"></div>
+                    <input name="userId" placeholder="아이디">
+                </div>
+                <div class="user_info_input">
+                    <div class="icon_over"><img src="./images/password.png" alt="password"></div>
+                    <input name="password" placeholder="비밀번호">
+                </div>
+                <button type="submit">로그인</button>
+                <div class="hrbox">
+                    <hr>
+                    <p>OR</p>
+                    <hr>
+                </div>
+                <div class="snsbox">
+                    <div><img src="./images/github.png"></div>
+                    <div><img src="./images/kakaotalk.png"></div>
+                    <div><img src="./images/naver.png"></div>
+                    <div><img src="./images/google.png"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="overlay" id="sign_in">
+        <div class="overlay_contents">
+            <div>
+                <p>회원가입</p>
+                <button class="close_btn"><span class="material-symbols-outlined">
+                    close
+                    </span></button>
+            </div>
+            <div>
+                <div class="user_info_input">
+                    <div class="icon_over"><img src="images/userid.png" alt="id"></div>
+                    <input name="userId" placeholder="아이디">
+                </div>
+                <div class="user_info_input">
+                    <div class="icon_over"><img src="images/email.png" alt="id"></div>
+                    <input name="email" placeholder="이메일">
+                </div>
+                <div class="user_info_input">
+                    <div class="icon_over"><img src="./images/password.png" alt="password"></div>
+                    <input name="password" placeholder="비밀번호">
+                </div>
+                <div class="user_info_input">
+                    <div class="icon_over"></div>
+                    <input name="password2" placeholder="비밀번호 확인">
+                </div>
+                <button type="submit">회원가입</button>
+                <div class="hrbox">
+                    <hr>
+                    <p>OR</p>
+                    <hr>
+                </div>
+                <div class="snsbox">
+                    <div><img src="./images/github.png"></div>
+                    <div><img src="./images/kakaotalk.png"></div>
+                    <div><img src="./images/naver.png"></div>
+                    <div><img src="./images/google.png"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <header>
+        <div id="headerContainer">
+            <div id="headerVisible">
+                <div id="btn">
+                    <div>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+                <div>
+                    <img id="logo_kor" src="./images/logo_kor.png" alt="logo">
+                    <img id="logo" src="./images/logo.png" alt="logo">
+                </div>
+                <div>
+                    <span id="light_mode" class="material-symbols-outlined">
+                        light_mode
+                    </span>
+                    <div id="sign_btn">
+                        <span class="material-symbols-outlined">
+                            remember_me
+                        </span>
+                        <span>회원가입</span>
+                    </div>
+                    <div  id="log_btn">
+                        <span class="material-symbols-outlined">
+                            login
+                        </span>
+                        <span>로그인</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="blind">
+        <ul>
+            <li><a href="./sub.html?categ_Num=1" target="_blank">국내도서</a></li>
+            <li><a href="./sub.html?categ_Num=2" target="_blank">외국도서</a></li>
+            <li><a href="./sub.html?categ_Num=3" target="_blank">음반</a></li>
+            <li><a href="./sub.html?categ_Num=4" target="_blank">DVD</a></li>
+            <li><a href="./sub.html?categ_Num=5" target="_blank">중고책</a></li>
+            <li><a href="./sub.html?categ_Num=6" target="_blank">전자책</a></li>
+        </ul>
+    </div>
+    <div id="empty"><!-- 헤더 여백 용 --></div>
+    <section>
+        <div id="searchContents">
+            <div>
+                <h1>책을 나눕시다.</h1>
+                <h3>중고책 사고 싶을 땐, 알라딘 중고서점</h3>
+            </div>
+            <div id="search">
+                <input type="text" id="ItemSearch" placeholder="도서검색">
+                <button onclick="mainItemSearch($('#ItemSearch').val());"><img src="./images/search.png" alt="search"></button>
+            </div>
+        </div>
+    </section>
+    <div class="inner">
+        <p id=demo_0></p>
+        <p id=demo_1></p>
+        <h2>베스트셀러</h2>
+        <div id=Bestseller class="dp_flex"></div>
+        <h2>눈에 띄는 새 책</h2>
+        <div id=ItemNewAll class="dp_flex nor_flex"></div>
+        <h2>편집자 추천리스트</h2>
+        <div id=ItemNewSpecial class="dp_flex nor_flex"></div>
+        <div id="Event">
+            <h2>이벤트</h2>
+            <div id=Eventsel class="dp_flex">
+                <script>
+                    var ev_name = ["<프렐류드> 엽서 3종 세트", "<에픽 #09> 1500원 할인쿠폰", "<여우와 나> 손수건", "<일어나> 구매 시, 기쁨 포스터", "<굿 리스너 4> 구매 시, 굿 리스너 포켓북", "<인생의 역사> 포함, 국내도서 2만 원 이상 구입 시, 친필 사인 커피잔받침 세트 (마일리지 차감)", "<만 원으로 차리는 파인 다이닝> 구매 시, 요리용디 포토 브로마이드", "10월의 주목도서 + 텀블러(이벤트 도서 포함 국내서 2만원 이상)"];
+                    var ev_date = ["2022년 10월 17일", "2022년 10년 11일", "2022년 10월 11일", "2022년 10월 14일", "2022년 10월 14일", "2022년 10월 17일", "2022년 10월 17일", "2022년 10월 14일"];
+                    for(i = 0; i < 8; i++) {
+                        document.write(`
+                            <div class='newItem'>
+                                <div class='newItemImage'>
+                                    <img src='./images/events/e${i+1}.jpg'>
+                                </div>
+                                <div class='newContents'>
+                                    <p>${ev_name[i]}</p>
+                                    <p>${ev_date[i]} 부터 선착순</p>
+                                </div>
+                            </div>
+                        `);
+                    };
+                    sel3("Eventsel");
+                </script>
+            </div>
+            <div id="Eventbottom"><!-- 여백용 --></div>
+        </div>
+        <h2>블로거 베스트셀러</h2>
+        <div id=BlogBest class="dp_flex nor_flex"></div>
+    </div>
+    <footer>
+        <div id="footItem">
+            <img id="footImage" src="./images/logo_footer.png" alt="logo">
+            <div id="footContents">
+                <p>(주) 알라딘커뮤니케이션</p>
+                <p class="p_flex"><span>대표이사 : 최우경</span><span>고객정보보호 책임자 : 최우경</span></p>
+                <p class="p_flex"><span>사업자등록 : 201-81-23094</span><span>E-mail : privacy@aladin.co.kr</span></p>
+                <p>통신판매업신고 : 중구01520호</p>
+                <p>호스팅 제공자 : 알라딘커뮤니케이션</p>
+                <p>(본사) 서울시 중구 서소문로 89-31 ㅣ (중고매장) 자세히보기</p>
+                <p>(고객센터) 서울시 마포구 백범로 71 숨도빌딩 7층, Fax 02-6926-2600</p>
+                <p>ⓒ Aladin Communication. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <!-- 토글 메뉴 -->
+    <script>
+        $("#btn").click(function(){
+            $("ul").toggleClass("active");
+            $("#btn").toggleClass("active");
+        });
+        window.addEventListener('resize', () => {
+            if(window.innerWidth >= 960) {
+                $("ul").removeClass("active");  
+                $("#btn").removeClass("active");  
+            }
+        })
+    </script>
+    <!-- 오버레이 색션 토글 -->
+    <script>
+        $("#log_btn").click(function(){
+            $("#log_in").addClass("active");
+        });
+        $("#sign_btn").click(function(){
+            $("#sign_in").addClass("active");
+        });
+        $(".close_btn").click(function(){
+            $("#log_in").removeClass("active");
+            $("#sign_in").removeClass("active");
+        });
+        $(document).mouseup(function (e){
+            var overlay_contents = $(".overlay_contents");
+            if (overlay_contents.has(e.target).length === 0) {
+                console.log((e.target).lenght);
+                $("#log_in").removeClass("active");
+                $("#sign_in").removeClass("active");
+            }
+        })
+    </script>
+    <!-- 헤더 ul 위치 조정 -->
+    <script>
+        if(window.innerWidth >= 960) {
+            var position_ul = (window.innerWidth / 2 - 260) + "px";
+            $(".blind").css("left", position_ul);
+        };
+        window.addEventListener('resize', () => {
+            if(window.innerWidth >= 960) {
+                var position_ul = (window.innerWidth / 2 - 260) + "px";
+                $(".blind").css("left", position_ul);
+            }
+        });
+    </script>
+</body>
+</html>
