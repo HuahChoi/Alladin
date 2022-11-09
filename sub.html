@@ -63,15 +63,14 @@
                         if (author_etc.length > 1) {
                             etc_text = " 외 " + (author_etc.length - 1) + "명";
                         }
-                        
                         document.getElementById('local_Book_baduk').innerHTML += `
                         <div class="t_01">
                             <div class="t_0102">
                                 <div class="t_010201">
-                                    <p><a href="./detail.html?detail_item_Num=${fruit.itemId}" target="_blank"><img src="${fruit.cover}"></a></p>
+                                    <p><a href="./detail.html?detail_item_Num=${fruit.itemId}"><img src="${fruit.cover}"></a></p>
                                 </div>
                                 <div class="t_010202">
-                                    <p><a href="./detail.html?detail_item_Num=${fruit.itemId}" target="_blank"><b class="book_title">${fruit.title}</b></a></p>
+                                    <p><a href="./detail.html?detail_item_Num=${fruit.itemId}"><b class="book_title">${fruit.title}</b></a></p>
                                     <p>${pub_data_k[0]}년 ${pub_data_k[1]}월 ${pub_data_k[2]}일</p>
                                     <p>${author_etc[0]}${etc_text}</p>
                                     <p>${publisher_shorts[0]}</p>
@@ -85,14 +84,14 @@
                                 <div><input type="checkbox"></div>
                             </div>
                             <div class="t_010201">
-                                <p><a href="./detail.html?detail_item_Num=${fruit.itemId}" target="_blank"><img src="${fruit.cover}"></a></p>
+                                <p><a href="./detail.html?detail_item_Num=${fruit.itemId}"><img src="${fruit.cover}"></a></p>
                             </div>
                             <div class="t_010202">
                                 <p>[${fruit.categoryName}]</p>
-                                <p class="book_title"><a href="./detail.html?detail_item_Num=${fruit.itemId}" target="_blank">${fruit.title}</a></p>
+                                <p class="book_title"><a href="./detail.html?detail_item_Num=${fruit.itemId}">${fruit.title}</a></p>
                                 <div>
                                     <div class="kt_contents">
-                                        <p>출판사</p><p>${fruit.publisher}</p>
+                                        <p>출판사</p><p>${fruit.publisher}</p> 
                                     </div>
                                     <div class="kt_contents">
                                         <p>저자</p><p>${fruit.author}</p>
@@ -109,20 +108,37 @@
                             </div>
                             <div class="t_0103">
                                 <div>
-                                    <button class="btn color_white bg_deepPink">예약<br>장바구니</button>
+                                    <button class="btn btn1">장바구니</button>
                                 </div>
                                 <div>
-                                    <button class="btn color_white bg_crimson">예약<br>바로구매</button>
+                                    <button class="btn btn2">바로구매</button>
                                 </div>
                                 <div>
-                                    <button class="btn color_7ab4da gb_7ab4da">보관함▾</button>
+                                    <button class="btn btn3">보관함▾</button>
                                 </div>
                             </div>
                         </div>
                         `
-                    });
-                },error : function(XMLHttpRequest, textStatus, errorThrown){
-                    console.log(textStatus);
+                        });
+                        if (window.innerWidth >= 1270) {
+                            resetbaduk();
+                        } else if (window.innerWidth >= 1096) {
+                            $("#local_Book_baduk .t_01:nth-last-child(1)").css("display", "none");
+                            $("#local_Book_baduk .t_01:nth-last-child(2)").css("display", "none");
+                            $("#local_Book_baduk .t_01:nth-last-child(3)").css("display", "none");
+                            $("#local_Book_baduk .t_01:nth-last-child(4)").css("display", "none");
+                        } else if (window.innerWidth >= 923) {
+                            $("#local_Book_baduk .t_01:nth-last-child(1)").css("display", "none");
+                            $("#local_Book_baduk .t_01:nth-last-child(2)").css("display", "none");
+                            $("#local_Book_baduk .t_01:nth-last-child(3)").css("display", "none");
+                        } else {
+                            $("#local_Book_baduk .t_01:nth-last-child(1)").css("display", "none");
+                            $("#local_Book_baduk .t_01:nth-last-child(2)").css("display", "none");
+                            $("#local_Book_baduk .t_01:nth-last-child(3)").css("display", "none");
+                            $("#local_Book_baduk .t_01:nth-last-child(4)").css("display", "none");
+                        }
+                    },error : function(XMLHttpRequest, textStatus, errorThrown){
+                        console.log(textStatus);
                 }
             });
         }
@@ -150,8 +166,8 @@
                     break;
                 default:
                     get_local_Book('Book');
-            };
-        });
+                };
+            });
     </script>
 </head>
 <body>
@@ -159,30 +175,34 @@
         <div class="overlay_contents">
             <div>
                 <p>로그인</p>
-                <button class="close_btn"><span class="material-symbols-outlined">
-                    close
-                    </span></button>
+                <button class="close_btn">
+                    <span class="material-symbols-outlined"> close </span>
+                </button>
             </div>
             <div>
                 <div class="user_info_input">
-                    <div class="icon_over"><img src="images/userid.png" alt="id"></div>
-                    <input name="userId" placeholder="아이디">
+                    <div class="icon_over">
+                        <img src="images/userid.png" alt="id" />
+                    </div>
+                    <input name="userId" placeholder="아이디" />
                 </div>
                 <div class="user_info_input">
-                    <div class="icon_over"><img src="./images/password.png" alt="password"></div>
-                    <input name="password" placeholder="비밀번호">
+                    <div class="icon_over">
+                        <img src="./images/password.png" alt="password" />
+                    </div>
+                    <input name="password" placeholder="비밀번호" />
                 </div>
                 <button type="submit">로그인</button>
                 <div class="hrbox">
-                    <hr>
+                    <hr />
                     <p>OR</p>
-                    <hr>
+                    <hr />
                 </div>
                 <div class="snsbox">
-                    <div><img src="./images/github.png"></div>
-                    <div><img src="./images/kakaotalk.png"></div>
-                    <div><img src="./images/naver.png"></div>
-                    <div><img src="./images/google.png"></div>
+                    <div class="snsbar bar1"><img src="./images/github.png" /><p>깃허브 <span class="none_448">아이디 로그인</span></p></div>
+                    <div class="snsbar bar2"><img src="./images/kakaotalk.png" /><p>카카오톡 <span class="none_448">아이디 로그인</span></p></div>
+                    <div class="snsbar bar3"><img src="./images/naver.png" /><p>네이버 <span class="none_448">아이디 로그인</span></p></div>
+                    <div class="snsbar bar4"><img src="./images/google.png" /><p>구글 <span class="none_448">아이디 로그인</span></p></div>
                 </div>
             </div>
         </div>
@@ -191,38 +211,44 @@
         <div class="overlay_contents">
             <div>
                 <p>회원가입</p>
-                <button class="close_btn"><span class="material-symbols-outlined">
-                    close
-                    </span></button>
+                <button class="close_btn">
+                    <span class="material-symbols-outlined"> close </span>
+                </button>
             </div>
             <div>
                 <div class="user_info_input">
-                    <div class="icon_over"><img src="images/userid.png" alt="id"></div>
-                    <input name="userId" placeholder="아이디">
+                    <div class="icon_over">
+                        <img src="images/userid.png" alt="id" />
+                    </div>
+                    <input name="userId" placeholder="아이디" />
                 </div>
                 <div class="user_info_input">
-                    <div class="icon_over"><img src="images/email.png" alt="id"></div>
-                    <input name="email" placeholder="이메일">
+                    <div class="icon_over">
+                        <img src="images/email.png" alt="id" />
+                    </div>
+                    <input name="email" placeholder="이메일" />
                 </div>
                 <div class="user_info_input">
-                    <div class="icon_over"><img src="./images/password.png" alt="password"></div>
-                    <input name="password" placeholder="비밀번호">
+                    <div class="icon_over">
+                        <img src="./images/password.png" alt="password" />
+                    </div>
+                    <input name="password" placeholder="비밀번호" />
                 </div>
                 <div class="user_info_input">
                     <div class="icon_over"></div>
-                    <input name="password2" placeholder="비밀번호 확인">
+                    <input name="password2" placeholder="비밀번호 확인" />
                 </div>
                 <button type="submit">회원가입</button>
                 <div class="hrbox">
-                    <hr>
+                    <hr />
                     <p>OR</p>
-                    <hr>
+                    <hr />
                 </div>
                 <div class="snsbox">
-                    <div><img src="./images/github.png"></div>
-                    <div><img src="./images/kakaotalk.png"></div>
-                    <div><img src="./images/naver.png"></div>
-                    <div><img src="./images/google.png"></div>
+                    <div class="snsbar bar1"><img src="./images/github.png" /><p>깃허브 <span class="none_448">아이디로 가입</span></p></div>
+                    <div class="snsbar bar2"><img src="./images/kakaotalk.png" /><p>카카오톡 <span class="none_448">아이디로 가입</span></p></div>
+                    <div class="snsbar bar3"><img src="./images/naver.png" /><p>네이버 <span class="none_448">아이디로 가입</span></p></div>
+                    <div class="snsbar bar4"><img src="./images/google.png" /><p>구글 <span class="none_448">아이디로 가입</span></p></div>
                 </div>
             </div>
         </div>
@@ -238,20 +264,29 @@
                     </div>
                 </div>
                 <div>
-                    <img id="logo_kor" src="./images/logo_kor.png" alt="logo">
-                    <img id="logo" src="./images/logo.png" alt="logo">
+                    <a href="./index.html">
+                        <img
+                            id="logo_kor"
+                            src="./images/logo_kor.png"
+                            alt="logo"
+                        />
+                        <img id="logo" src="./images/logo.png" alt="logo" />
+                    </a>
                 </div>
                 <div>
-                    <span id="light_mode" class="material-symbols-outlined">
+                    <span id="light_mode" class="material-symbols-outlined theme_mode">
                         light_mode
                     </span>
-                    <div id="sign_btn">
+                    <span id="dark_mode" class="material-symbols-outlined theme_mode">
+                        dark_mode
+                    </span>
+                    <div id="sign_btn" class="sign_log">
                         <span class="material-symbols-outlined">
                             remember_me
                         </span>
                         <span>회원가입</span>
                     </div>
-                    <div  id="log_btn">
+                    <div id="log_btn" class="sign_log">
                         <span class="material-symbols-outlined">
                             login
                         </span>
@@ -297,20 +332,53 @@
         </div>
         <div id="local_Book_baduk"></div>
         <div id="local_Book_list"></div>
-        </div>
     </div>
     <footer>
-        <div id="footItem">
-            <img id="footImage" src="./images/logo_footer.png" alt="logo">
-            <div id="footContents">
-                <p>(주) 알라딘커뮤니케이션</p>
-                <p class="p_flex"><span>대표이사 : 최우경</span><span>고객정보보호 책임자 : 최우경</span></p>
-                <p class="p_flex"><span>사업자등록 : 201-81-23094</span><span>E-mail : privacy@aladin.co.kr</span></p>
-                <p>통신판매업신고 : 중구01520호</p>
-                <p>호스팅 제공자 : 알라딘커뮤니케이션</p>
-                <p>(본사) 서울시 중구 서소문로 89-31 ㅣ (중고매장) 자세히보기</p>
-                <p>(고객센터) 서울시 마포구 백범로 71 숨도빌딩 7층, Fax 02-6926-2600</p>
-                <p>ⓒ Aladin Communication. All Rights Reserved.</p>
+        <div class="footer_container">
+            <p><img src="./images/logo.png" /></p>
+            <div class="footer_pc_flex">
+                <div class="footer_flex0">
+                    <div class="footer_flex1">
+                        <p>회사소개</p>
+                        <p>이용약관</p>
+                    </div>
+                    <div class="footer_flex1">
+                        <p>중고매장</p>
+                        <p>광고안내</p>
+                    </div>
+                </div>
+                <div class="footer_flex2">
+                    <p>개인정보처리방침</p>
+                    <p>청소년 보호정책</p>
+                </div>
+                <div class="footer_flex2">
+                    <p>제휴/마케팅안내</p>
+                    <p>출판사/공급사 안내</p>
+                </div>
+                <div class="footer_flex2">
+                    <p>판매자 매니저</p>
+                    <p>학교/기업/기관 대량구매</p>
+                </div>
+            </div>
+            <div class="footer_flex3">
+                <p>
+                    <span class="footer_pc">(주)알라딘커뮤니케이션</span> 대표이사 :
+                    최우경 <span class="footer_pc">
+                        사업자등록 : 201-81-23094 통신판매업신고 :
+                        중구01520호</span
+                    >
+                </p>
+                <p>
+                    <span class="footer_pc">고객센터 </span>일반문의 <span class="footer_pc">(발신자 부담)</span
+                    >: 1544-2514
+                </p>
+            </div>
+            <div class="footer_pc_flex">
+                <p>(본사) 서울시 중구 서소문로 89-31</p>
+                <p>
+                    (고객센터) 서울시 마포구 백범로 71 <br class='footer_mobile' />숨도빌딩 7층, Fax
+                    02-6926-2600
+                </p>
             </div>
         </div>
     </footer>
@@ -329,24 +397,27 @@
     </script>
     <!-- 오버레이 색션 토글 -->
     <script>
-        $("#log_btn").click(function(){
+        $("#log_btn").click(function () {
             $("#log_in").addClass("active");
+            $("body").addClass("active");
         });
-        $("#sign_btn").click(function(){
+        $("#sign_btn").click(function () {
             $("#sign_in").addClass("active");
+            $("body").addClass("active");
         });
-        $(".close_btn").click(function(){
+        $(".close_btn").click(function () {
             $("#log_in").removeClass("active");
             $("#sign_in").removeClass("active");
+            $("body").removeClass("active");
         });
-        $(document).mouseup(function (e){
+        $(document).mouseup(function (e) {
             var overlay_contents = $(".overlay_contents");
             if (overlay_contents.has(e.target).length === 0) {
-                console.log((e.target).lenght);
                 $("#log_in").removeClass("active");
                 $("#sign_in").removeClass("active");
+                $("body").removeClass("active");
             }
-        })
+        });
     </script>
     <!-- 헤더 ul 위치 조정 -->
     <script>
@@ -365,12 +436,14 @@
     <script>
         $("#baduk").click(function(){
             $("#baduk").css("color", "#2B6CB0").css("border-bottom", "2px solid #2B6CB0");
+            $(".dark_theme #baduk").css("color", "#90cdf4").css("border-bottom", "2px solid #90cdf4");
             $("#list").css("color", "#a8a8a8").css("border-bottom", "1px solid #a8a8a8").css("cursor", "pointer");
             $("#local_Book_baduk").css("display", "flex");
             $("#local_Book_list").css("display", "none");
         });
         $("#list").click(function(){
             $("#list").css("color", "#2B6CB0").css("border-bottom", "2px solid #2B6CB0");
+            $(".dark_theme #list").css("color", "#90cdf4").css("border-bottom", "2px solid #90cdf4");
             $("#baduk").css("color", "#a8a8a8").css("border-bottom", "1px solid #a8a8a8").css("cursor", "pointer");
             $("#local_Book_baduk").css("display", "none");
             $("#local_Book_list").css("display", "block");
@@ -378,30 +451,53 @@
     </script>
     <!-- 바둑 배열 컨텐츠 배수 조정(미완) -->
     <script>
+        function resetbaduk() {
+            for(i = 1; i <= 28*Page; i++) {
+                $("#local_Book_baduk .t_01:nth-child("+i+")").css("display", "block");
+            }
+        };
+        /* 변경값 */
         window.addEventListener('resize', () => {
-            if (window.innerWidth >= 1079 && window.innerWidth < 1253) {
-                for(i = 1; i <= page*4; i++) {
-                    for(k = 1; k <= (28 - page*4); k++) {
-                        $("#local_Book_baduk .t_01:nth-child("+k+")").css("display", "block");
-                    }
+            if (window.innerWidth >= 1270) {
+                resetbaduk();
+            } else if (window.innerWidth >= 1096) {
+                resetbaduk();
+                for(i = 1; i <= Page*4; i++) {
                     $("#local_Book_baduk .t_01:nth-last-child("+i+")").css("display", "none");
                 }
-            } else if (window.innerWidth >= 905) {
-                for(i = 1; i <= page*3; i++) {
-                    for(k = 1; k <= (28 - page*3); k++) {
-                        $("#local_Book_baduk .t_01:nth-child("+k+")").css("display", "block");
-                    }
+            } else if (window.innerWidth >= 923) {
+                resetbaduk();
+                for(i = 1; i <= Page*3; i++) {
                     $("#local_Book_baduk .t_01:nth-last-child("+i+")").css("display", "none");
                 }
-            } else if (window.innerWidth >= 383) {
-                for(i = 1; i <= page*4; i++) {
-                    for(k = 1; k <= (28 - page*4); k++) {
-                        $("#local_Book_baduk .t_01:nth-child("+k+")").css("display", "block");
-                    }
+            } else {
+                resetbaduk();
+                for(i = 1; i <= Page*4; i++) {
                     $("#local_Book_baduk .t_01:nth-last-child("+i+")").css("display", "none");
                 }
             }
         });
+    </script>
+    <!-- 다크모드 구현(로컬스토리지이용) -->
+    <script>
+        const isUserColorTheme = localStorage.getItem('color-theme');
+
+        window.onload = function() {
+            if(isUserColorTheme === 'dark') {
+                $("body").addClass("dark_theme");
+            } else {
+                localStorage.setItem('color-theme', 'light');
+            }
+        };
+
+        $("#light_mode").click(function(){
+            localStorage.setItem('color-theme', 'dark');
+            $("body").addClass("dark_theme");
+        });
+        $("#dark_mode").click(function(){
+            localStorage.setItem('color-theme', 'light');
+            $("body").removeClass("dark_theme");
+        })
     </script>
 </body>
 </html>
