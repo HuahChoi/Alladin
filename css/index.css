@@ -446,6 +446,57 @@ h2 {
     font-size: 0.9em;
 }
 
+/* 스켈레톤 베스트셀러 */
+/* #Bestseller .skelItem {
+    width: 240px;
+    height: 280px;
+    animation: skel_infi_purse 1s linear infinite;
+}
+#Bestseller .skelItem .skelRank {
+    position: relative;
+    width: 230px;
+    margin: 0 auto;
+}
+#Bestseller .skelItem .skelItemNum {
+    position: absolute;
+    top: 0;
+    left: 23px;
+    height: 195px;
+    line-height: 210px;
+    font-size: 10em;
+    color: white;
+    text-shadow: -2px 0px #3182ce, 0px 2px #3182ce, 2px 0px #3182ce,
+    0px -2px #3182ce;
+}
+#Bestseller .skelItemImage {
+    position: absolute;
+    width: 130px;
+    height: 200px;
+    top: 0;
+    left: 90px;
+    z-index: 9;
+    background: #C4B152;
+}
+#Bestseller .skelContents {
+    margin: 215px auto;
+}
+#Bestseller .skelContents p {
+    width: 200px;
+    height: 20px;
+    background: #4a4a4a;
+}
+@keyframes skel_infi_purse {
+    0% {
+        opacity: 0.1;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0.1;
+    }
+} */
+
 /* 베스트 셀러*/
 #Bestseller .newItem {
     height: 280px;

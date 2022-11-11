@@ -403,14 +403,68 @@ input[type="radio"] {
     border-bottom: 1px solid #a8a8a8;
     cursor: pointer;
 }
-/* 바둑판 배열 css */
+
+/* 스켈레톤 css */ 
 #local_Book_baduk {
     display: flex;
     flex-wrap: wrap;
-    align-content: center;
     justify-content: space-between;
+    align-content: center;
     padding: 24px 16px;
 }
+#local_Book_baduk .skel_01 {
+    width: 160px;
+    height: 295px;
+    margin: 30px 0;
+    animation: skel_infi_purse 1s linear infinite;
+}
+#local_Book_baduk .skel_010101 {
+    width: 140px;
+    margin: 0 auto;
+}
+#local_Book_baduk .skel_010101 .skel_img {
+    width: 130px;
+    height: 200px;
+    margin: 0 auto;
+    border-radius: 20px;
+    background: #C4B152;
+}
+#local_Book_baduk .skel_010102 {
+    width: 140px;
+    margin: 0 auto;
+    margin-top: 8px;
+}
+#local_Book_baduk .skel_010102 p {
+    width: 100px;
+    height: 18px;
+    border-radius: 8px;
+    margin-bottom: 5px;
+    background: #4a4a4a;
+}
+#local_Book_baduk .skel_010102 .skel_title {
+    width: 120px;
+    height: 20px;
+    background: #F6A924;
+}
+#local_Book_baduk .skel_010102 .skel_date {
+    width: 80px;
+    height: 14px;
+    background: #929292;
+}
+
+@keyframes skel_infi_purse {
+    0% {
+        opacity: 0.1;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0.1;
+    }
+}
+
+/* 바둑판 배열 css */
 #local_Book_baduk .t_01 {
     width: 160px;
     height: 295px;

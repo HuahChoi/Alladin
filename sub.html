@@ -23,13 +23,36 @@
     <script>
         var org_Name;
         var Page = 1;
+        function making_skel(){
+            for(i = 0; i < 28; i++) {
+                document.getElementById('local_Book_baduk').innerHTML += `
+                    <div class="skel_01">
+                        <div class="skel_0101">
+                            <div class="skel_010101">
+                                <p class='skel_img'></p>
+                            </div>
+                            <div class="skel_010102">
+                                <p class='skel_title'></p>
+                                <p class='skel_date'></p>
+                                <p></p>
+                                <p></p>
+                            </div>
+                        </div>
+                    </div>
+                `
+            };
+        }
         function get_local_Book(itemName){
+            /* 함수 정의 */
             if(org_Name != itemName){
                 org_Name = itemName;
                 document.getElementById("local_Book_list").innerHTML = "";
                 document.getElementById("local_Book_baduk").innerHTML = "";
+                /* 스켈레톤 이미지 */
+                making_skel();
             }else{
                 Page += 1
+                making_skel();
             }
             var nameBook = "국내도서";
             if(itemName == "book"){
@@ -120,6 +143,7 @@
                         </div>
                         `
                         });
+                        $("#local_Book_baduk .skel_01").remove();
                         if (window.innerWidth >= 1270) {
                             resetbaduk();
                         } else if (window.innerWidth >= 1096) {
@@ -481,7 +505,7 @@
     <!-- 다크모드 구현(로컬스토리지이용) -->
     <script>
         const isUserColorTheme = localStorage.getItem('color-theme');
-
+        /* 페이지 로드시 컬러테마 판별 */
         window.onload = function() {
             if(isUserColorTheme === 'dark') {
                 $("body").addClass("dark_theme");
@@ -489,7 +513,7 @@
                 localStorage.setItem('color-theme', 'light');
             }
         };
-
+        /* 컬러테마 클릭 이벤트 */
         $("#light_mode").click(function(){
             localStorage.setItem('color-theme', 'dark');
             $("body").addClass("dark_theme");
