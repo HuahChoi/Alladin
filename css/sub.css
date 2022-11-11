@@ -416,7 +416,7 @@ input[type="radio"] {
     width: 160px;
     height: 295px;
     margin: 30px 0;
-    animation: skel_infi_purse 2s linear infinite;
+    animation: skel_infi_purse 4s linear infinite;
 }
 #local_Book_baduk .skel_010101 {
     width: 140px;
